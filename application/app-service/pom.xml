@@ -57,6 +57,11 @@
             <artifactId>kafka-consumer</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.devsu.microservices.bankingmicroservice.client-service.kafka-producer</groupId>
+            <artifactId>kafka-producer</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
         <!-- Spring Boot Starters -->
         <dependency>

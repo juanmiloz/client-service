@@ -39,6 +39,7 @@
         <module>infrastructure/driven-adapters/r2dbc-postgresql</module>
         <module>application/app-service</module>
         <module>infrastructure/entry-points/kafka-consumer</module>
+        <module>infrastructure/driven-adapters/kafka-producer</module>
     </modules>
 
     <dependencyManagement>

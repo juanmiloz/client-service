@@ -13,5 +13,12 @@ adapters:
 spring:
   kafka:
     consumer:
-      bootstrap-servers: "localhost:9092"
+      bootstrap-servers:
+        - "localhost:9092"
+        - "localhost:9094"
       group-id: "client-service"
+    producer:
+      bootstrap-servers:
+        - "localhost:9092"
+        - "localhost:9094"
+      client-id: "client-service"
