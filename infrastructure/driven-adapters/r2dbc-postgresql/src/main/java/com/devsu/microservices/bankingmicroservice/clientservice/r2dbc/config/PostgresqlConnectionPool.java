@@ -2,6 +2,7 @@ package com.devsu.microservices.bankingmicroservice.clientservice.r2dbc.config;
 
 import io.r2dbc.pool.ConnectionPool;
 import io.r2dbc.pool.ConnectionPoolConfiguration;
+
 import io.r2dbc.postgresql.PostgresqlConnectionConfiguration;
 import io.r2dbc.postgresql.PostgresqlConnectionFactory;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +21,7 @@ public class PostgresqlConnectionPool {
     @Bean
     @Primary
     public ConnectionPool getConnectionConfig(PostgresqlConnectionProperties properties) {
-        PostgresqlConnectionConfiguration dbConfiguration = PostgresqlConnectionConfiguration.builder()
+        PostgresqlConnectionConfiguration dbConfiguration = PostgresqlConnectionConfiguration .builder()
                 .host(properties.host())
                 .port(properties.port())
                 .database(properties.database())

@@ -6,9 +6,6 @@ adapters:
     schema: ${DB_SCHEMA}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-  kafka:
-    consumer:
-          topic: "test"
 
 spring:
   kafka:
