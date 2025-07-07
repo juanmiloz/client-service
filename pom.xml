@@ -40,6 +40,7 @@
         <module>application/app-service</module>
         <module>infrastructure/entry-points/kafka-consumer</module>
         <module>infrastructure/driven-adapters/kafka-producer</module>
+        <module>aceptance-tests</module>
     </modules>
 
     <dependencyManagement>

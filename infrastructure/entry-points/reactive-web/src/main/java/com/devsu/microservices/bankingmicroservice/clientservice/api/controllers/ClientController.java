@@ -50,7 +50,7 @@ public class ClientController implements ClientAPI {
     public Mono<ResponseEntity<Void>> deleteClient(UUID id) {
         return clientCrudUseCase
                 .deleteClient(id)
-                .map(v -> ResponseEntity.noContent().<Void>build());
+                .thenReturn(ResponseEntity.noContent().build());
     }
 
 }
