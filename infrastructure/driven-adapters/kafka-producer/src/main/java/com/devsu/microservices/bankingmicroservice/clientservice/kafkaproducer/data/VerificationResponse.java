@@ -1,7 +1,13 @@
 package com.devsu.microservices.bankingmicroservice.clientservice.kafkaproducer.data;
 
+import java.util.UUID;
+
 public record VerificationResponse(
-        Boolean clientExist,
-        String clientName
+        UUID clientId,
+        String accountNumber,
+        String clientName,
+        String accountType,
+        Double initialBalance,
+        Boolean status
 ) {
 }

@@ -1,18 +1,14 @@
 package com.devsu.microservices.bankingmicroservice.clientservice.kafkaconsumer.config;
 
-import com.devsu.microservices.bankingmicroservice.clientservice.kafkaconsumer.data.response.ClientVerificationResponse;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.common.serialization.StringSerializer;
+import com.devsu.microservices.bankingmicroservice.clientservice.kafkaconsumer.data.response.AccountVerificationResponse;
+import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
-import org.springframework.boot.ssl.SslBundles;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.reactive.ReactiveKafkaConsumerTemplate;
-import org.springframework.kafka.core.reactive.ReactiveKafkaProducerTemplate;
+import org.springframework.kafka.support.serializer.JsonDeserializer;
 import reactor.kafka.receiver.ReceiverOptions;
-import reactor.kafka.sender.SenderOptions;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -23,23 +19,23 @@ import java.util.Map;
 public class ConsumerKafkaConfig {
 
     @Bean
-    public ReceiverOptions<String, String> kafkaReceiverOptions(
+    public ReceiverOptions<String, AccountVerificationResponse> kafkaReceiverOptions(
             @Value(value = "client-verification-request") String topic,
-            KafkaProperties  kafkaProperties,
-            SslBundles sslBundles
+            KafkaProperties  kafkaProperties
             ) throws UnknownHostException {
         kafkaProperties.setClientId(InetAddress.getLocalHost().getHostName());
+        Map<String, Object> props = kafkaProperties.buildConsumerProperties();
 
-        ReceiverOptions<String, String> receiverOptions = ReceiverOptions.create(
-                kafkaProperties.buildConsumerProperties(sslBundles)
-        );
-
-        return receiverOptions.subscription(Collections.singleton(topic));
+        return ReceiverOptions
+                .<String, AccountVerificationResponse>create(props)
+                .withKeyDeserializer(new StringDeserializer())
+                .withValueDeserializer(new JsonDeserializer<>(AccountVerificationResponse.class, false))
+                .subscription(Collections.singleton(topic));
     }
 
     @Bean
-    public ReactiveKafkaConsumerTemplate<String, String> reactiveKafkaConsumerTemplate(
-            ReceiverOptions<String, String> kafkaReceiverOptions
+    public ReactiveKafkaConsumerTemplate<String, AccountVerificationResponse> reactiveKafkaConsumerTemplate(
+            ReceiverOptions<String, AccountVerificationResponse> kafkaReceiverOptions
     ){
         return new ReactiveKafkaConsumerTemplate<>(kafkaReceiverOptions);
     }
