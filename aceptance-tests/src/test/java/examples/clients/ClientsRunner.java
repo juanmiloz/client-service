@@ -4,10 +4,7 @@ import com.intuit.karate.junit5.Karate;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-@SpringBootTest(
-        classes = com.devsu.microservices.bankingmicroservice.clientservice.ClientServiceApplication.class,
-        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT
-)
+@SpringBootTest
 @ActiveProfiles("test")
 public class ClientsRunner {
 
